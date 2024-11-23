@@ -8,6 +8,7 @@ GIT_REPO="https://github.com/Sanster/lama-cleaner"
 echo "Building cpu docker image..."
 
 docker buildx build \
+--platform linux/amd64 \
 --file ./docker/CPUDockerfile \
 --label org.opencontainers.image.title=lama-cleaner \
 --label org.opencontainers.image.description="$IMAGE_DESC" \
@@ -15,12 +16,13 @@ docker buildx build \
 --label org.opencontainers.image.source=$GIT_REPO \
 --label org.opencontainers.image.version=$GIT_TAG \
 --build-arg version=$GIT_TAG \
---tag lama-cleaner:cpu-$GIT_TAG .
+--tag cwq1913/lama-cleaner:cpu-$GIT_TAG .
 
 
-echo "Building NVIDIA GPU docker image..."
+# echo "Building NVIDIA GPU docker image..."
 
 docker buildx build \
+--platform linux/amd64 \
 --file ./docker/GPUDockerfile \
 --label org.opencontainers.image.title=lama-cleaner \
 --label org.opencontainers.image.description="$IMAGE_DESC" \
@@ -28,4 +30,4 @@ docker buildx build \
 --label org.opencontainers.image.source=$GIT_REPO \
 --label org.opencontainers.image.version=$GIT_TAG \
 --build-arg version=$GIT_TAG \
---tag lama-cleaner:gpu-$GIT_TAG .
+--tag cwq1913/lama-cleaner:gpu-$GIT_TAG .
